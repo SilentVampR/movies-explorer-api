@@ -9,9 +9,6 @@ const { limiter } = require('./middlewares/limiter');
 
 const { db, PORT } = require('./config/config');
 
-console.log(db);
-console.log(process.env);
-
 const { corsConfig } = require('./middlewares/corsconfig');
 
 const {
@@ -47,7 +44,8 @@ app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/moviesdb');
+// mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(`mongodb://${db.address}:${db.port}/${db.name}`);
 
 app.use(corsConfig);
 
