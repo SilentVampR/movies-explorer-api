@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config('../.env');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -72,4 +72,5 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   // console.log('Сервер запущен на порту', PORT);
+  console.log(process.env.NODE_ENV);
 });
