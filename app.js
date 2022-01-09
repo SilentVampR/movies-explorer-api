@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const { corsConfig } = require('./middlewares/corsconfig');
 
@@ -35,6 +36,13 @@ app.use(cookieParser()); // Работа с cookie
 
 app.use(helmet()); // Активируем helmet
 app.disable('x-powered-by'); // Отключаем заголовок принадлежности
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 90,
+  legacyHeaders: false,
+});
+app.use(limiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

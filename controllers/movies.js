@@ -67,7 +67,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (ownerId !== req.user._id) {
         throw new ForbiddenError('Недостаточно прав для выполнения данного действия');
       }
-      return Movie.findByIdAndRemove(req.params.cardId)
+      return Movie.findByIdAndRemove(req.params.movieId)
         .then((movieToDelete) => res
           .status(202)
           .send({ data: movieToDelete }))
