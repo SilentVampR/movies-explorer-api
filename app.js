@@ -72,5 +72,4 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   // console.log('Сервер запущен на порту', PORT);
-  console.log(process.env.NODE_ENV);
 });
