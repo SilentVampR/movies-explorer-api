@@ -71,5 +71,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log('Сервер запущен на порту', PORT);
+  // console.log('Сервер запущен на порту', PORT);
 });
