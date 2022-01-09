@@ -76,7 +76,7 @@ module.exports.getMe = (req, res, next) => {
       }
       return res
         .status(200)
-        .send({ data: user, NODE_ENV });
+        .send({ data: user, env: NODE_ENV });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
