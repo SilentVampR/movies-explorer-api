@@ -50,24 +50,6 @@ module.exports.createUser = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Запрашиваемый пользователь не найден');
-      }
-      return res
-        .status(200)
-        .send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new RequestError('Некорректное значение ID пользователя'));
-      }
-      next(err);
-    });
-};
-
 module.exports.getMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
