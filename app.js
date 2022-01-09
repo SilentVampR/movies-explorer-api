@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const { limiter } = require('./middlewares/limiter');
+
+const { db, PORT } = require('./config/config');
+
+console.log(db);
 
 const { corsConfig } = require('./middlewares/corsconfig');
 
@@ -26,7 +30,7 @@ const { auth } = require('./middlewares/auth');
 const userRoutes = require('./routes/users');
 const movieRoutes = require('./routes/movies');
 
-const { PORT = 3002 } = process.env;
+// const { PORT = 3002 } = process.env;
 
 const app = express();
 
@@ -37,11 +41,6 @@ app.use(cookieParser()); // Работа с cookie
 app.use(helmet()); // Активируем helmet
 app.disable('x-powered-by'); // Отключаем заголовок принадлежности
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 90,
-  legacyHeaders: false,
-});
 app.use(limiter);
 
 app.use(bodyParser.json());
