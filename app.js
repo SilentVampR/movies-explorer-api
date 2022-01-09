@@ -10,6 +10,7 @@ const { limiter } = require('./middlewares/limiter');
 const { db, PORT } = require('./config/config');
 
 console.log(db);
+console.log(process.env);
 
 const { corsConfig } = require('./middlewares/corsconfig');
 
