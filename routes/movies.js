@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { urlPattern } = require('../helpers/patterns');
+const validateUrl = require('../helpers/validation');
 const {
   createMovie,
   getMovies,
@@ -14,9 +14,9 @@ router.post('/movies', celebrate({
     nameRU: Joi.string().min(2).max(30).required(),
     nameEN: Joi.string().min(2).max(30).required(),
     movieId: Joi.number().required(),
-    thumbnail: Joi.string().uri().required().pattern(urlPattern),
-    trailer: Joi.string().uri().required().pattern(urlPattern),
-    image: Joi.string().uri().required().pattern(urlPattern),
+    thumbnail: Joi.string().required().custom(validateUrl),
+    trailer: Joi.string().required().custom(validateUrl),
+    image: Joi.string().required().custom(validateUrl),
     description: Joi.string().required(),
     year: Joi.string().required(),
     duration: Joi.number().required(),

@@ -42,15 +42,15 @@ module.exports.createMovie = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new RequestError(`Не все поля заполены корректно: ${getErrors(err)}`));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .sort({ createdAt: -1 })
-    .populate(['owner'])
     .then((movies) => res
       .status(200)
       .send({ data: movies }))
@@ -67,21 +67,16 @@ module.exports.deleteMovie = (req, res, next) => {
       if (ownerId !== req.user._id) {
         throw new ForbiddenError('Недостаточно прав для выполнения данного действия');
       }
-      return Movie.findByIdAndRemove(req.params.movieId)
-        .then((movieToDelete) => res
+      return movie.remove()
+        .then(() => res
           .status(202)
-          .send({ data: movieToDelete }))
-        .catch((err) => {
-          if (err.name === 'CastError') {
-            next(new RequestError('Переданы некорректные данные для удаления фильма'));
-          }
-          next(err);
-        });
+          .send({ data: movie }));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new RequestError('Переданы некорректные данные для удаления фильма'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };

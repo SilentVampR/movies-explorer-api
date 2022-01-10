@@ -18,11 +18,9 @@ const { errorHandler } = require('./middlewares/errorhandler');
 const NotFoundError = require('./errors/not-found-err');
 
 // Импортируем маршруты
-const signRoutes = require('./routes/sign');
-const { auth } = require('./middlewares/auth');
-const userRoutes = require('./routes/users');
-const movieRoutes = require('./routes/movies');
+const { signRoutes, userRoutes, movieRoutes } = require('./routes');
 
+const { auth } = require('./middlewares/auth');
 // const { PORT = 3002 } = process.env;
 
 const app = express();

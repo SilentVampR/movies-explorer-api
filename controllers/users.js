@@ -45,8 +45,9 @@ module.exports.createUser = (req, res, next) => {
         .catch((err) => {
           if (err.name === 'ValidationError') {
             next(new RequestError(`Не все поля заполены корректно: ${getErrors(err)}`));
+          } else {
+            next(err);
           }
-          next(err);
         });
     })
     .catch(next);
@@ -63,9 +64,6 @@ module.exports.getMe = (req, res, next) => {
         .send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new RequestError('Некорректное значение ID пользователя'));
-      }
       next(err);
     });
 };
@@ -89,8 +87,11 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new RequestError(`Не все поля заполены корректно: ${getErrors(err)}`));
+      } else if (err.code === 11000) {
+        next(new ConflictError('Указанный email принадлежит другому пользователю'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
