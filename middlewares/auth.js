@@ -1,7 +1,10 @@
 const { NODE_ENV, JWT_SECRET } = process.env;
+
 const jwt = require('jsonwebtoken');
 
-const secret = NODE_ENV === 'production' ? JWT_SECRET : 'some-dev-secret';
+const { jwtDevSecret } = require('../config/config');
+
+const secret = NODE_ENV === 'production' ? JWT_SECRET : jwtDevSecret;
 
 const AuthError = require('../errors/auth-err');
 

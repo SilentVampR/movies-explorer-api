@@ -9,6 +9,8 @@ const AuthError = require('../errors/auth-err');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+const { jwtDevSecret } = require('../config/config');
+
 const getErrors = (data) => Object.values(data.errors).map((error) => error.message);
 
 module.exports.createUser = (req, res, next) => {
@@ -110,7 +112,7 @@ module.exports.signin = (req, res, next) => {
           }
           const token = jwt.sign(
             { _id: user._id },
-            NODE_ENV === 'production' ? JWT_SECRET : 'some-dev-secret',
+            NODE_ENV === 'production' ? JWT_SECRET : jwtDevSecret,
             { expiresIn: '7d' },
           );
           return res
