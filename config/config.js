@@ -7,7 +7,7 @@ const { SERVER_ADDRESS = serverAddress } = process.env;
 const jwtDevSecret = 'some-dev-secret';
 
 const db = {
-  name: 'mongodb',
+  name: 'moviesdb',
   address: SERVER_ADDRESS,
   port: '27017',
 };
