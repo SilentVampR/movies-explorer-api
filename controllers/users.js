@@ -123,7 +123,7 @@ module.exports.signin = (req, res, next) => {
               httpOnly: true,
               // sameSite: true,
               sameSite: 'none',
-              secure: true,
+              //secure: true,
             })
             .send({ name: user.name, email });
           // .end();
