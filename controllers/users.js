@@ -125,7 +125,7 @@ module.exports.signin = (req, res, next) => {
               sameSite: 'none',
               secure: true,
             })
-            .send({ email });
+            .send({ name: user.name, email });
           // .end();
         })
         .catch(next);
