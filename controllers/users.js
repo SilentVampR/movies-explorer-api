@@ -139,5 +139,11 @@ module.exports.signout = (req, res) => res
   /* .clearCookie('jwt', {
     path: '/',
   }) */
-  .cookie('jwt', { path: '/' })
+  .cookie('jwt', '', {
+    maxAge: 0,
+    httpOnly: true,
+    // sameSite: true,
+    sameSite: 'none',
+    secure: true,
+  })
   .send({ message: 'Осуществлен выход из приложения' });
