@@ -136,7 +136,8 @@ module.exports.signin = (req, res, next) => {
 
 module.exports.signout = (req, res) => res
   .status(200)
-  .clearCookie('jwt', {
+  /* .clearCookie('jwt', {
     path: '/',
-  })
+  }) */
+  .cookie('jwt', { path: '/' })
   .send({ message: 'Осуществлен выход из приложения' });
