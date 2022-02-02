@@ -136,9 +136,6 @@ module.exports.signin = (req, res, next) => {
 
 module.exports.signout = (req, res) => res
   .status(200)
-  /* .clearCookie('jwt', {
-    path: '/',
-  }) */
   .cookie('jwt', '', {
     maxAge: 0,
     httpOnly: true,
