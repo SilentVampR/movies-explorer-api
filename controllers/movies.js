@@ -49,7 +49,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user_id })
     .sort({ createdAt: -1 })
     .then((movies) => res
       .status(200)
