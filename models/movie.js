@@ -32,7 +32,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (value) => validator.isURL(value, { protocols: ['http', 'https'], require_tld: true, require_protocol: true }),
-      message: 'Терйлер - URL имеет неверный формат',
+      message: 'Трейлер - URL имеет неверный формат',
     },
   },
   image: {
