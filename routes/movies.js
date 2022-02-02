@@ -11,8 +11,8 @@ router.get('/movies', getMovies);
 
 router.post('/movies', celebrate({
   body: Joi.object().keys({
-    nameRU: Joi.string().min(2).max(30).required(),
-    nameEN: Joi.string().min(2).max(30).required(),
+    nameRU: Joi.string().min(2).max(50).required(),
+    nameEN: Joi.string().min(2).max(50).required(),
     movieId: Joi.number().required(),
     thumbnail: Joi.string().required().custom(validateUrl),
     trailer: Joi.string().required().custom(validateUrl),
