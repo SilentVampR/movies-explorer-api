@@ -70,4 +70,6 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
+cardSchema.index({ movieId: 1, owner: 1 }, { unique: true });
+
 module.exports = mongoose.model('movie', cardSchema);
